@@ -2,12 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ActorOverworldAction : MonoBehaviour
+public class ActionTypeStateOverworldMovement : MonoBehaviour
 {
     [SerializeField] private InputActionReference inputWalking;
     [SerializeField] private InputActionReference inputJumping;
     [SerializeField] private InputActionReference inputInteracting;
-    [SerializeField] private CharacterController NameOfCharacterCharacterController;
+
+    private CharacterController thisCharacterController;
     private void OnEnable()
     {
         inputWalking.action.Enable();
@@ -32,7 +33,12 @@ public class ActorOverworldAction : MonoBehaviour
 
     private void Awake()
     {
-        
+        if (TryGetComponent<CharacterController>(out thisCharacterController))
+            Debug.Log("Found Character Controller");
+        else
+        {
+            throw new NullReferenceException();
+        }
     }
 
     void Start()
@@ -44,7 +50,7 @@ public class ActorOverworldAction : MonoBehaviour
     {
         Vector2 inputDirectionVector = inputWalking.action.ReadValue<Vector2>();
         Vector3 movementVector = Vector3.right* inputDirectionVector.x + Vector3.forward*inputDirectionVector.y;
-        NameOfCharacterCharacterController.Move(movementVector.normalized * Time.deltaTime);
+        thisCharacterController.Move(movementVector.normalized * Time.deltaTime);
     }
 
     private void OnInputActionPerformedInputJumping(InputAction.CallbackContext context)

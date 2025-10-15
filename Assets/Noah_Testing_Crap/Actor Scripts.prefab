@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8147096439099444696}
-  - component: {fileID: 3743455527268809022}
   m_Layer: 2
   m_Name: Actor Scripts
   m_TagString: GameController
@@ -32,19 +31,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3743455527268809022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264733858631335975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3aa4ac5816788a489bfdb6fd1eb045e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputWalking: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  inputJumping: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  inputInteracting: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  NameOfCharacterCharacterController: {fileID: 7841759188789517454, guid: 35aadeb5ded45ac408284a622c521726, type: 3}
