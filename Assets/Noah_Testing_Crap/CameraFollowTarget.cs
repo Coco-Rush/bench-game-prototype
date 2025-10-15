@@ -33,6 +33,7 @@ public class CameraFollowTarget : MonoBehaviour
     {
         // Do once a rotation for camera to look at camera without doing "LookAt"
         
+        sceneMainCamera.transform.localRotation = Quaternion.Euler(distanceBetweenTargetAndCamera*Mathf.Acos(directionFromTargetToCamera.z), 0f, 0f);
     }
 
     // Update is called once per frame
@@ -43,6 +44,6 @@ public class CameraFollowTarget : MonoBehaviour
         Vector3 toTranslate = smoothedCameraPosition - sceneMainCamera.transform.position;
         sceneMainCamera.transform.Translate(toTranslate);
         //sceneMainCamera.transform.LookAt(targetTransform);
-        sceneMainCamera.transform.localRotation = Quaternion.Euler(distanceBetweenTargetAndCamera*Mathf.Acos(directionFromTargetToCamera.z), 0f, 0f);
+        
     }
 }
