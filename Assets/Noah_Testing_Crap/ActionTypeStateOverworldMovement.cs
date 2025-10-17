@@ -7,6 +7,7 @@ public class ActionTypeStateOverworldMovement : MonoBehaviour
     [SerializeField] private InputActionReference inputWalking;
     [SerializeField] private InputActionReference inputJumping;
     [SerializeField] private InputActionReference inputInteracting;
+    [SerializeField] private float walkingSpeed;
 
     private CharacterController thisCharacterController;
     private void OnEnable()
@@ -50,7 +51,7 @@ public class ActionTypeStateOverworldMovement : MonoBehaviour
     {
         Vector2 inputDirectionVector = inputWalking.action.ReadValue<Vector2>();
         Vector3 movementVector = Vector3.right* inputDirectionVector.x + Vector3.forward*inputDirectionVector.y;
-        thisCharacterController.Move(movementVector.normalized * Time.deltaTime);
+        thisCharacterController.Move(movementVector.normalized * (walkingSpeed * Time.deltaTime));
     }
 
     private void OnInputActionPerformedInputJumping(InputAction.CallbackContext context)

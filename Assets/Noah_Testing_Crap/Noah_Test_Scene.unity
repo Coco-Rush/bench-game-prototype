@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &465406178 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 609526278801402837, guid: 35aadeb5ded45ac408284a622c521726, type: 3}
+  m_PrefabInstance: {fileID: 1458033711}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &568967336
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fce28faa69bcfc4584001e83284d634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 1266545364}
+  targetTransform: {fileID: 465406178}
   directionFromTargetToCamera: {x: 0, y: 5, z: -12}
   distanceBetweenTargetAndCamera: 7
   smoothedOutLerp: 0.0125
@@ -507,11 +512,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!4 &1266545364 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 868712811224347871, guid: 35aadeb5ded45ac408284a622c521726, type: 3}
-  m_PrefabInstance: {fileID: 1458033711}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1458033711
 PrefabInstance:
   m_ObjectHideFlags: 0

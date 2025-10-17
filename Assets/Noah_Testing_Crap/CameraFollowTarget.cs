@@ -40,7 +40,7 @@ public class CameraFollowTarget : MonoBehaviour
     void Update()
     {
         Vector3 desiredCameraPosition = targetTransform.position + targetToCamera;
-        Vector3 smoothedCameraPosition = Vector3.Slerp(sceneMainCamera.transform.position, desiredCameraPosition, smoothedOutLerp);
+        Vector3 smoothedCameraPosition = Vector3.Lerp(sceneMainCamera.transform.position, desiredCameraPosition, smoothedOutLerp);
         Vector3 toTranslate = smoothedCameraPosition - sceneMainCamera.transform.position;
         sceneMainCamera.transform.Translate(toTranslate);
         //sceneMainCamera.transform.LookAt(targetTransform);
