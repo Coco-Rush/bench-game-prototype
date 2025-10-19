@@ -1,0 +1,22 @@
+[
+  {"id": 41, "word": "good", "normal": "good", "more": "better", "most": "best", "irregular": true, "comparative_type": "irregular", "superlative_type": "irregular"},
+  {"id": 42, "word": "new", "normal": "new", "more": "newer", "most": "newest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 43, "word": "first", "normal": "first", "more": "-", "most": "-", "irregular": true, "comparative_type": "non-gradable", "superlative_type": "non-gradable"},
+  {"id": 44, "word": "last", "normal": "last", "more": "-", "most": "-", "irregular": true, "comparative_type": "non-gradable", "superlative_type": "non-gradable"},
+  {"id": 45, "word": "long", "normal": "long", "more": "longer", "most": "longest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 46, "word": "great", "normal": "great", "more": "greater", "most": "greatest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 47, "word": "little", "normal": "little", "more": "less", "most": "least", "irregular": true, "comparative_type": "irregular", "superlative_type": "irregular"},
+  {"id": 48, "word": "own", "normal": "own", "more": "-", "most": "-", "irregular": true, "comparative_type": "non-gradable", "superlative_type": "non-gradable"},
+  {"id": 49, "word": "other", "normal": "other", "more": "-", "most": "-", "irregular": true, "comparative_type": "non-gradable", "superlative_type": "non-gradable"},
+  {"id": 50, "word": "old", "normal": "old", "more": "older", "most": "oldest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 51, "word": "right", "normal": "right", "more": "more right", "most": "most right", "irregular": false, "comparative_type": "more", "superlative_type": "most"},
+  {"id": 52, "word": "big", "normal": "big", "more": "bigger", "most": "biggest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 53, "word": "high", "normal": "high", "more": "higher", "most": "highest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 54, "word": "different", "normal": "different", "more": "more different", "most": "most different", "irregular": false, "comparative_type": "more", "superlative_type": "most"},
+  {"id": 55, "word": "small", "normal": "small", "more": "smaller", "most": "smallest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 56, "word": "large", "normal": "large", "more": "larger", "most": "largest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 57, "word": "next", "normal": "next", "more": "-", "most": "-", "irregular": true, "comparative_type": "non-gradable", "superlative_type": "non-gradable"},
+  {"id": 58, "word": "early", "normal": "early", "more": "earlier", "most": "earliest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 59, "word": "young", "normal": "young", "more": "younger", "most": "youngest", "irregular": false, "comparative_type": "er", "superlative_type": "est"},
+  {"id": 60, "word": "important", "normal": "important", "more": "more important", "most": "most important", "irregular": false, "comparative_type": "more", "superlative_type": "most"}
+]

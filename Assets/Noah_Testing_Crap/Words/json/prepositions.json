@@ -1,0 +1,22 @@
+[
+  {"id": 71, "word": "in", "type": "place", "example": "in the room", "common_usage": ["location", "time", "method"]},
+  {"id": 72, "word": "on", "type": "place", "example": "on the table", "common_usage": ["surface", "day", "topic"]},
+  {"id": 73, "word": "at", "type": "place", "example": "at school", "common_usage": ["point", "time", "activity"]},
+  {"id": 74, "word": "by", "type": "agent", "example": "by the river", "common_usage": ["method", "location", "time"]},
+  {"id": 75, "word": "with", "type": "accompaniment", "example": "with friends", "common_usage": ["company", "instrument", "characteristic"]},
+  {"id": 76, "word": "about", "type": "topic", "example": "about love", "common_usage": ["topic", "approximation"]},
+  {"id": 77, "word": "against", "type": "opposition", "example": "against the wall", "common_usage": ["opposition", "location"]},
+  {"id": 78, "word": "between", "type": "position", "example": "between two points", "common_usage": ["position", "choice"]},
+  {"id": 79, "word": "into", "type": "direction", "example": "into the room", "common_usage": ["movement", "transformation"]},
+  {"id": 80, "word": "through", "type": "movement", "example": "through the tunnel", "common_usage": ["movement", "means"]},
+  {"id": 111, "word": "to", "type": "direction", "example": "go to school", "common_usage": ["direction", "purpose"]},
+  {"id": 112, "word": "from", "type": "origin", "example": "from London", "common_usage": ["origin", "time"]},
+  {"id": 113, "word": "of", "type": "possession", "example": "color of sky", "common_usage": ["possession", "material", "topic"]},
+  {"id": 114, "word": "for", "type": "purpose", "example": "for you", "common_usage": ["purpose", "duration", "benefit"]},
+  {"id": 115, "word": "over", "type": "position", "example": "over the bridge", "common_usage": ["position", "movement", "topic"]},
+  {"id": 116, "word": "under", "type": "position", "example": "under the table", "common_usage": ["position", "condition"]},
+  {"id": 117, "word": "after", "type": "time", "example": "after dinner", "common_usage": ["time", "sequence"]},
+  {"id": 118, "word": "before", "type": "time", "example": "before noon", "common_usage": ["time", "sequence"]},
+  {"id": 119, "word": "during", "type": "time", "example": "during the movie", "common_usage": ["time period"]},
+  {"id": 120, "word": "without", "type": "absence", "example": "without sugar", "common_usage": ["absence", "lack"]}
+]

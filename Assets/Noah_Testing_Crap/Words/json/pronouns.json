@@ -1,0 +1,22 @@
+[
+  {"id": 91, "word": "I", "type": "personal", "case": "subject", "person": "first", "number": "singular", "gender": "neutral"},
+  {"id": 92, "word": "you", "type": "personal", "case": "subject/object", "person": "second", "number": "singular/plural", "gender": "neutral"},
+  {"id": 93, "word": "he", "type": "personal", "case": "subject", "person": "third", "number": "singular", "gender": "masculine"},
+  {"id": 94, "word": "she", "type": "personal", "case": "subject", "person": "third", "number": "singular", "gender": "feminine"},
+  {"id": 95, "word": "it", "type": "personal", "case": "subject/object", "person": "third", "number": "singular", "gender": "neuter"},
+  {"id": 96, "word": "we", "type": "personal", "case": "subject", "person": "first", "number": "plural", "gender": "neutral"},
+  {"id": 97, "word": "they", "type": "personal", "case": "subject", "person": "third", "number": "plural", "gender": "neutral"},
+  {"id": 98, "word": "me", "type": "personal", "case": "object", "person": "first", "number": "singular", "gender": "neutral"},
+  {"id": 99, "word": "him", "type": "personal", "case": "object", "person": "third", "number": "singular", "gender": "masculine"},
+  {"id": 100, "word": "her", "type": "personal", "case": "object", "person": "third", "number": "singular", "gender": "feminine"},
+  {"id": 131, "word": "us", "type": "personal", "case": "object", "person": "first", "number": "plural", "gender": "neutral"},
+  {"id": 132, "word": "them", "type": "personal", "case": "object", "person": "third", "number": "plural", "gender": "neutral"},
+  {"id": 133, "word": "myself", "type": "reflexive", "person": "first", "number": "singular", "example": "I hurt myself"},
+  {"id": 134, "word": "yourself", "type": "reflexive", "person": "second", "number": "singular", "example": "Help yourself"},
+  {"id": 135, "word": "himself", "type": "reflexive", "person": "third", "number": "singular", "gender": "masculine", "example": "He saw himself"},
+  {"id": 136, "word": "herself", "type": "reflexive", "person": "third", "number": "singular", "gender": "feminine", "example": "She bought herself"},
+  {"id": 137, "word": "itself", "type": "reflexive", "person": "third", "number": "singular", "gender": "neuter", "example": "The cat cleaned itself"},
+  {"id": 138, "word": "ourselves", "type": "reflexive", "person": "first", "number": "plural", "example": "We enjoyed ourselves"},
+  {"id": 139, "word": "yourselves", "type": "reflexive", "person": "second", "number": "plural", "example": "Help yourselves"},
+  {"id": 140, "word": "themselves", "type": "reflexive", "person": "third", "number": "plural", "example": "They hurt themselves"}
+]

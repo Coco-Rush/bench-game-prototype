@@ -1,0 +1,22 @@
+[
+  {"id": 61, "word": "the", "type": "definite article", "example": "the book"},
+  {"id": 62, "word": "a", "type": "indefinite article", "example": "a book", "usage_note": "used before consonant sounds"},
+  {"id": 63, "word": "an", "type": "indefinite article", "example": "an apple", "usage_note": "used before vowel sounds"},
+  {"id": 64, "word": "this", "type": "demonstrative", "example": "this book", "number": "singular", "distance": "near"},
+  {"id": 65, "word": "that", "type": "demonstrative", "example": "that book", "number": "singular", "distance": "far"},
+  {"id": 66, "word": "these", "type": "demonstrative", "example": "these books", "number": "plural", "distance": "near"},
+  {"id": 67, "word": "those", "type": "demonstrative", "example": "those books", "number": "plural", "distance": "far"},
+  {"id": 68, "word": "my", "type": "possessive", "example": "my book", "person": "first"},
+  {"id": 69, "word": "your", "type": "possessive", "example": "your book", "person": "second"},
+  {"id": 70, "word": "his", "type": "possessive", "example": "his book", "person": "third", "gender": "masculine"},
+  {"id": 101, "word": "her", "type": "possessive", "example": "her book", "person": "third", "gender": "feminine"},
+  {"id": 102, "word": "its", "type": "possessive", "example": "its color", "person": "third", "gender": "neuter"},
+  {"id": 103, "word": "our", "type": "possessive", "example": "our house", "person": "first", "number": "plural"},
+  {"id": 104, "word": "their", "type": "possessive", "example": "their car", "person": "third", "number": "plural"},
+  {"id": 105, "word": "some", "type": "quantifier", "example": "some water"},
+  {"id": 106, "word": "any", "type": "quantifier", "example": "any questions"},
+  {"id": 107, "word": "each", "type": "distributive", "example": "each student"},
+  {"id": 108, "word": "every", "type": "distributive", "example": "every day"},
+  {"id": 109, "word": "all", "type": "quantifier", "example": "all people"},
+  {"id": 110, "word": "both", "type": "quantifier", "example": "both books"}
+]

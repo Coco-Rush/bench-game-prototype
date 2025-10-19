@@ -1,0 +1,22 @@
+[
+  {"id": 1, "word": "be", "sing1": "am", "sing2": "are", "sing3": "is", "plur1": "are", "plur2": "are", "plur3": "are", "past": "was/were", "past_participle": "been", "gerund": "being", "irregular": true},
+  {"id": 2, "word": "have", "sing1": "have", "sing2": "have", "sing3": "has", "plur1": "have", "plur2": "have", "plur3": "have", "past": "had", "past_participle": "had", "gerund": "having", "irregular": true},
+  {"id": 3, "word": "do", "sing1": "do", "sing2": "do", "sing3": "does", "plur1": "do", "plur2": "do", "plur3": "do", "past": "did", "past_participle": "done", "gerund": "doing", "irregular": true},
+  {"id": 4, "word": "say", "sing1": "say", "sing2": "say", "sing3": "says", "plur1": "say", "plur2": "say", "plur3": "say", "past": "said", "past_participle": "said", "gerund": "saying", "irregular": true},
+  {"id": 5, "word": "get", "sing1": "get", "sing2": "get", "sing3": "gets", "plur1": "get", "plur2": "get", "plur3": "get", "past": "got", "past_participle": "gotten/got", "gerund": "getting", "irregular": true},
+  {"id": 6, "word": "make", "sing1": "make", "sing2": "make", "sing3": "makes", "plur1": "make", "plur2": "make", "plur3": "make", "past": "made", "past_participle": "made", "gerund": "making", "irregular": true},
+  {"id": 7, "word": "go", "sing1": "go", "sing2": "go", "sing3": "goes", "plur1": "go", "plur2": "go", "plur3": "go", "past": "went", "past_participle": "gone", "gerund": "going", "irregular": true},
+  {"id": 8, "word": "know", "sing1": "know", "sing2": "know", "sing3": "knows", "plur1": "know", "plur2": "know", "plur3": "know", "past": "knew", "past_participle": "known", "gerund": "knowing", "irregular": true},
+  {"id": 9, "word": "take", "sing1": "take", "sing2": "take", "sing3": "takes", "plur1": "take", "plur2": "take", "plur3": "take", "past": "took", "past_participle": "taken", "gerund": "taking", "irregular": true},
+  {"id": 10, "word": "see", "sing1": "see", "sing2": "see", "sing3": "sees", "plur1": "see", "plur2": "see", "plur3": "see", "past": "saw", "past_participle": "seen", "gerund": "seeing", "irregular": true},
+  {"id": 11, "word": "come", "sing1": "come", "sing2": "come", "sing3": "comes", "plur1": "come", "plur2": "come", "plur3": "come", "past": "came", "past_participle": "come", "gerund": "coming", "irregular": true},
+  {"id": 12, "word": "think", "sing1": "think", "sing2": "think", "sing3": "thinks", "plur1": "think", "plur2": "think", "plur3": "think", "past": "thought", "past_participle": "thought", "gerund": "thinking", "irregular": true},
+  {"id": 13, "word": "look", "sing1": "look", "sing2": "look", "sing3": "looks", "plur1": "look", "plur2": "look", "plur3": "look", "past": "looked", "past_participle": "looked", "gerund": "looking", "irregular": false},
+  {"id": 14, "word": "want", "sing1": "want", "sing2": "want", "sing3": "wants", "plur1": "want", "plur2": "want", "plur3": "want", "past": "wanted", "past_participle": "wanted", "gerund": "wanting", "irregular": false},
+  {"id": 15, "word": "give", "sing1": "give", "sing2": "give", "sing3": "gives", "plur1": "give", "plur2": "give", "plur3": "give", "past": "gave", "past_participle": "given", "gerund": "giving", "irregular": true},
+  {"id": 16, "word": "use", "sing1": "use", "sing2": "use", "sing3": "uses", "plur1": "use", "plur2": "use", "plur3": "use", "past": "used", "past_participle": "used", "gerund": "using", "irregular": false},
+  {"id": 17, "word": "find", "sing1": "find", "sing2": "find", "sing3": "finds", "plur1": "find", "plur2": "find", "plur3": "find", "past": "found", "past_participle": "found", "gerund": "finding", "irregular": true},
+  {"id": 18, "word": "tell", "sing1": "tell", "sing2": "tell", "sing3": "tells", "plur1": "tell", "plur2": "tell", "plur3": "tell", "past": "told", "past_participle": "told", "gerund": "telling", "irregular": true},
+  {"id": 19, "word": "ask", "sing1": "ask", "sing2": "ask", "sing3": "asks", "plur1": "ask", "plur2": "ask", "plur3": "ask", "past": "asked", "past_participle": "asked", "gerund": "asking", "irregular": false},
+  {"id": 20, "word": "work", "sing1": "work", "sing2": "work", "sing3": "works", "plur1": "work", "plur2": "work", "plur3": "work", "past": "worked", "past_participle": "worked", "gerund": "working", "irregular": false}
+]

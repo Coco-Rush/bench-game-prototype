@@ -1,0 +1,22 @@
+[
+  {"id": 81, "word": "and", "type": "coordinating", "function": "addition", "example": "tea and coffee"},
+  {"id": 82, "word": "but", "type": "coordinating", "function": "contrast", "example": "poor but happy"},
+  {"id": 83, "word": "or", "type": "coordinating", "function": "alternative", "example": "yes or no"},
+  {"id": 84, "word": "so", "type": "coordinating", "function": "result", "example": "tired so I slept"},
+  {"id": 85, "word": "yet", "type": "coordinating", "function": "contrast", "example": "simple yet effective"},
+  {"id": 86, "word": "for", "type": "coordinating", "function": "reason", "example": "stay, for it's late"},
+  {"id": 87, "word": "nor", "type": "coordinating", "function": "negative addition", "example": "neither here nor there"},
+  {"id": 88, "word": "while", "type": "subordinating", "function": "time/contrast", "example": "while I was reading"},
+  {"id": 89, "word": "although", "type": "subordinating", "function": "concession", "example": "although it rained"},
+  {"id": 90, "word": "because", "type": "subordinating", "function": "reason", "example": "because I said so"},
+  {"id": 121, "word": "if", "type": "subordinating", "function": "condition", "example": "if you come"},
+  {"id": 122, "word": "when", "type": "subordinating", "function": "time", "example": "when she arrives"},
+  {"id": 123, "word": "since", "type": "subordinating", "function": "time/reason", "example": "since yesterday"},
+  {"id": 124, "word": "until", "type": "subordinating", "function": "time", "example": "until tomorrow"},
+  {"id": 125, "word": "unless", "type": "subordinating", "function": "condition", "example": "unless it rains"},
+  {"id": 126, "word": "where", "type": "subordinating", "function": "place", "example": "where I live"},
+  {"id": 127, "word": "whether", "type": "subordinating", "function": "choice", "example": "whether or not"},
+  {"id": 128, "word": "though", "type": "subordinating", "function": "concession", "example": "though it's difficult"},
+  {"id": 129, "word": "as", "type": "subordinating", "function": "time/reason", "example": "as I said"},
+  {"id": 130, "word": "once", "type": "subordinating", "function": "time", "example": "once upon a time"}
+]
