@@ -192,5 +192,8 @@ MonoBehaviour:
   inputWalking: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   inputJumping: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   inputInteracting: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  inputInspecting: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  inputListening: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  inputTalking: {fileID: 2411907206095950430, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   walkingSpeed: 3
   radiusOfSphereCastToCheckForInteractableThingsAroundPlayer: 0

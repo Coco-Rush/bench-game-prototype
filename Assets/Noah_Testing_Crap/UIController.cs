@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject highlightInteract;
     [SerializeField] private GameObject highlightListen;
     [SerializeField] private GameObject highlightTalk;
+    [SerializeField] private TextMeshProUGUI speechTMPForSpeechInBubble;
 
     private GameObject instantiatedHighlightInspect;
     private GameObject instantiatedHighlightInteract;
@@ -66,5 +68,35 @@ public class UIController : MonoBehaviour
     public void HideUIElementInspect()
     {
         Destroy(instantiatedHighlightInspect);
+    }
+
+    public void HideUIElementInteract()
+    {
+        Destroy(instantiatedHighlightInteract);
+    }
+
+    public void HideUIElementListen()
+    {
+        Destroy(instantiatedHighlightListen);
+    }
+
+    public void HideUIElementTalk()
+    {
+        Destroy(instantiatedHighlightTalk);
+    }
+
+    public void ShowSpeechBubble()
+    {
+        
+    }
+
+    public void HideSpeechBubble()
+    {
+        
+    }
+
+    public void InsertTextForTMP(string followingText)
+    {
+        speechTMPForSpeechInBubble.text = followingText;
     }
 }

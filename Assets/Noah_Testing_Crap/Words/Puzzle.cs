@@ -7,9 +7,10 @@ public class Puzzle : ScriptableObject
     // Sentence
     [SerializeField] private List<Word> words;
 
+    public List<string> chitChatListForEachPuzzle;
     public IReadOnlyList<Word> readOnlyWords => words;
     // timelimit
     [SerializeField] private float timelimitForPuzzleInSeconds;
     // isPuzzleSolved?
-    private bool isSolved;
+    [HideInInspector] public bool isSolved;
 }

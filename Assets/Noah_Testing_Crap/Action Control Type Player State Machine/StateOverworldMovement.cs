@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,12 +9,14 @@ using UnityEngine.InputSystem;
 /// - Overworld Movement
 /// - Detect Interactable, Inspectable and Conversable Objects
 /// </summary>
-public class ActionTypeStateOverworldMovement : MonoBehaviour
+public class StateOverworldMovement : MonoBehaviour, IControlTypeState
 {
     [SerializeField] private InputActionReference inputWalking;
     [SerializeField] private InputActionReference inputJumping;
     [SerializeField] private InputActionReference inputInteracting;
     [SerializeField] private InputActionReference inputInspecting;
+    [SerializeField] private InputActionReference inputListening;
+    [SerializeField] private InputActionReference inputTalking;
     [SerializeField] private float walkingSpeed;
     [SerializeField] private float radiusOfSphereCastToCheckForInteractableThingsAroundPlayer;
 
@@ -21,9 +24,9 @@ public class ActionTypeStateOverworldMovement : MonoBehaviour
 
     private CharacterController thisCharacterController;
 
-    private ValueTuple<bool, IInspectable> inspectableInReach;
-    private ValueTuple<bool, IInteractable> interactableInReach;
-    private ValueTuple<bool, IConversable> conversableInReach;
+    private IInteractable currentInteractable;
+    private IInspectable currentInspectable;
+    private IConversable currentConversable;
 
     private void OnEnable()
     {
@@ -31,10 +34,14 @@ public class ActionTypeStateOverworldMovement : MonoBehaviour
         inputJumping.action.Enable();
         inputInteracting.action.Enable();
         inputInspecting.action.Enable();
+        inputListening.action.Enable();
+        inputTalking.action.Enable();
 
         inputJumping.action.performed += OnInputActionPerformedInputJumping;
         inputInteracting.action.performed += OnInputActionPerformedInputInteracting;
         inputInspecting.action.performed += OnInputActionPerformedInputInspecting;
+        inputListening.action.performed += OnInputActionPerformedInputListening;
+        inputTalking.action.performed += OnInputActionPerformedInputTalking;
     }
 
     private void OnDisable()
@@ -42,11 +49,15 @@ public class ActionTypeStateOverworldMovement : MonoBehaviour
         inputJumping.action.performed -= OnInputActionPerformedInputJumping;
         inputInteracting.action.performed -= OnInputActionPerformedInputInteracting;
         inputInspecting.action.performed -= OnInputActionPerformedInputInspecting;
+        inputListening.action.performed -= OnInputActionPerformedInputListening;
+        inputTalking.action.performed -= OnInputActionPerformedInputTalking;
         
         inputWalking.action.Disable();
         inputJumping.action.Disable();
         inputInteracting.action.Disable();
         inputInspecting.action.Disable();
+        inputListening.action.Disable();
+        inputTalking.action.Disable();
     }
 
     private void Awake()
@@ -74,45 +85,40 @@ public class ActionTypeStateOverworldMovement : MonoBehaviour
         {
             // >>>> set a bool check to true and show UI element to communicate to player
             uiController.ShowUIElementInspect();
-            inspectableInReach = (true,inspectable);
+            currentInspectable = inspectable;
         }
-        else
-        {
-            // Remove UI Element
-            inspectableInReach.Item1 = false;
-        }
-            
         if (other.TryGetComponent<IInteractable>(out var interactable))
         {
             // >>>> set a bool check to true and show UI element to communicate to player
             uiController.ShowUIElementInteract();
-            interactableInReach = (true, interactable);
-        }
-        else
-        {
-            // Remove UI Element
-            interactableInReach.Item1 = false;
+            currentInteractable = interactable;
         }
         if (other.TryGetComponent<IConversable>(out var conversable))
         {
             // >>>> set a bool check to true and show UI element to communicate to player
             uiController.ShowUIElementListen();
             uiController.ShowUIElementTalk();
-            conversableInReach = (true, conversable);
-        }
-        else
-        {
-            // Remove UI Element
-            conversableInReach.Item1 = false;
+            currentConversable = conversable;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.gameObject);
-        if (other.TryGetComponent<IInspectable>(out var inspectable))
+        if (other.TryGetComponent<IInspectable>(out _))
         {
             uiController.HideUIElementInspect();
+            currentInspectable = null;
+        }
+        if (other.TryGetComponent<IInteractable>(out _))
+        {
+            uiController.HideUIElementInteract();
+            currentInteractable = null;
+        }
+        if (other.TryGetComponent<IConversable>(out _))
+        {
+            uiController.HideUIElementListen();
+            uiController.HideUIElementTalk();
+            currentConversable = null;
         }
     }
 
@@ -123,36 +129,52 @@ public class ActionTypeStateOverworldMovement : MonoBehaviour
 
     private void OnInputActionPerformedInputInteracting(InputAction.CallbackContext context)
     {
-        if (interactableInReach.Item1)
-        {
-            // Enter Interact State
-            // Action Depends on THIS interact object
-            interactableInReach.Item2.Interact();
-        }
+
+        if (currentInteractable.IsUnityNull()) return;
+        // Enter Interact State
+        // Action Depends on THIS interact object
     }
 
     private void OnInputActionPerformedInputInspecting(InputAction.CallbackContext context)
     {
-        if (inspectableInReach.Item1)
-        {
+        if (currentInspectable.IsUnityNull()) return;
             // Inspect Object -> Gain new word in dictionary
             // Should
-        }
     }
 
     private void OnInputActionPerformedInputListening(InputAction.CallbackContext context)
     {
-        if (conversableInReach.Item1)
+        if (currentConversable.IsUnityNull()) return;
+        
+        if (currentConversable.StartChitChat())
         {
-            
+            // Show Speech Bubble
+            uiController.ShowSpeechBubble();
+            uiController.HideUIElementInspect();
+            uiController.HideUIElementInteract();
+            uiController.HideUIElementTalk();
+            uiController.HideUIElementListen();
+            // Switch Action Type State to "ChitChatting"
+            ActorControlTypeStateMachine.Instance.ChangeStateToListening(currentConversable);
+        }
+        else
+        {
+            // Nothing to chitchat about
         }
     }
 
-    private void OnInputActionPerformedInputConverse(InputAction.CallbackContext context)
+    private void OnInputActionPerformedInputTalking(InputAction.CallbackContext context)
     {
-        if (conversableInReach.Item1)
-        {
-            
-        }
+        if (currentConversable.IsUnityNull()) return;
+    }
+
+    public void ExitState()
+    {
+        enabled = false;
+    }
+
+    public void EnterState()
+    {
+        enabled = true;
     }
 }
