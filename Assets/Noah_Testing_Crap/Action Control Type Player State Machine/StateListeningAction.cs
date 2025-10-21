@@ -8,6 +8,7 @@ public class StateListeningAction : MonoBehaviour, IControlTypeState
     [SerializeField] private InputActionReference inputToNextChitChat;
     [SerializeField] private InputActionReference inputSpeedUpText;
     private IConversable currentConversable;
+    private bool hasPressedInputToNextChitChat;
 
     private void OnEnable()
     {
@@ -16,14 +17,14 @@ public class StateListeningAction : MonoBehaviour, IControlTypeState
 
         inputSpeedUpText.action.started += OnInputActionStartedSpeedUpText;
         inputSpeedUpText.action.canceled += OnInputActionCanceledSpeedUpText;
-        inputToNextChitChat.action.performed += OnInputActionPerformedToNextChitChat;
+        inputToNextChitChat.action.started += OnInputActionStartedToNextChitChat;
     }
 
     private void OnDisable()
     {
         inputSpeedUpText.action.started -= OnInputActionStartedSpeedUpText;
         inputSpeedUpText.action.canceled -= OnInputActionCanceledSpeedUpText;
-        inputToNextChitChat.action.performed -= OnInputActionPerformedToNextChitChat;
+        inputToNextChitChat.action.started -= OnInputActionStartedToNextChitChat;
         
         inputSpeedUpText.action.Disable();
         inputToNextChitChat.action.Disable();
@@ -42,7 +43,7 @@ public class StateListeningAction : MonoBehaviour, IControlTypeState
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(inputToNextChitChat.action.ReadValue<float>());
     }
 
     public void ExitState()
@@ -60,19 +61,14 @@ public class StateListeningAction : MonoBehaviour, IControlTypeState
         currentConversable = conversable;
     }
 
-    private void OnInputActionPerformedToNextChitChat(InputAction.CallbackContext context)
+    private void OnInputActionStartedToNextChitChat(InputAction.CallbackContext context)
     {
-        if (currentConversable.NextChitChat())
-        {
-            // Means a next text is coming
-        }
-        else
-        {
-            // No more chit chat
-            // Hide Speech Bubble?
-            UIController.instance.HideSpeechBubble();
-            ActorControlTypeStateMachine.Instance.ChangeStateToOverworldMovement();
-        }
+        Debug.Log(context.action + " started ChitChat/Does Next Chit Chat");
+        if (currentConversable.NextChitChat()) return;
+        // No more chit chat
+        // Hide Speech Bubble?
+        UIController.instance.HideSpeechBubble();
+        ActorControlTypeStateMachine.ChangeStateToOverworldMovement();
     }
 
     private void OnInputActionStartedSpeedUpText(InputAction.CallbackContext context)

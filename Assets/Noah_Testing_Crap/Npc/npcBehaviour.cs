@@ -43,8 +43,11 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
 
     public bool NextChitChat()
     {
-        if (indexChitChat + 1 < currentPuzzle.chitChatListForEachPuzzle.Count)
+        if (indexChitChat + 1 >= currentPuzzle.chitChatListForEachPuzzle.Count)
+        {
+            PlayChitChat("");
             return false;
+        }
 
         indexChitChat += 1;
         PlayChitChat(currentPuzzle.chitChatListForEachPuzzle[indexChitChat]);

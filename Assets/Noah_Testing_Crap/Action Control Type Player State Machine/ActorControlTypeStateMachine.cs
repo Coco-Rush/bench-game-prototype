@@ -6,20 +6,25 @@ public class ActorControlTypeStateMachine : MonoBehaviour
 {
     [SerializeField] private StateOverworldMovement overworldMovement;
     [SerializeField] private StateListeningAction listeningAction;
-    public static ActorControlTypeStateMachine Instance;
+    private static ActorControlTypeStateMachine instance;
 
     private IControlTypeState currentState;
 
     private void Awake()
     {
-        if (!Instance.IsUnityNull() && Instance != this)
+        if (!instance.IsUnityNull() && instance != this)
             Destroy(this);
+        else
+        {
+            instance = this;
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ChangeStateToOverworldMovement();
+        listeningAction.enabled = false;
     }
 
     // Update is called once per frame
@@ -33,16 +38,17 @@ public class ActorControlTypeStateMachine : MonoBehaviour
         currentState?.ExitState();
         currentState = newState;
         currentState.EnterState();
+        Debug.Log("current State: " + currentState.GetType().ToString());
     }
 
-    public void ChangeStateToListening(IConversable currentConversable)
+    public static void ChangeStateToListening(IConversable currentConversable)
     {
-        ChangeState(listeningAction);
-        listeningAction.SetIConversable(currentConversable);
+        instance.ChangeState(instance.listeningAction);
+        instance.listeningAction.SetIConversable(currentConversable);
     }
 
-    public void ChangeStateToOverworldMovement()
+    public static void ChangeStateToOverworldMovement()
     {
-        ChangeState(overworldMovement);
+        instance.ChangeState(instance.overworldMovement);
     }
 }

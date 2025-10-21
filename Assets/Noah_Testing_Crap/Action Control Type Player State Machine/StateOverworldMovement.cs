@@ -155,7 +155,7 @@ public class StateOverworldMovement : MonoBehaviour, IControlTypeState
             uiController.HideUIElementTalk();
             uiController.HideUIElementListen();
             // Switch Action Type State to "ChitChatting"
-            ActorControlTypeStateMachine.Instance.ChangeStateToListening(currentConversable);
+            ActorControlTypeStateMachine.ChangeStateToListening(currentConversable);
         }
         else
         {
