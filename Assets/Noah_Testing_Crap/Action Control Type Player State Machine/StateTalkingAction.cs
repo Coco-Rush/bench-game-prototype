@@ -11,6 +11,9 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
 {
     [SerializeField] private InputActionReference inputClickOnThings;
     [SerializeField] private InputActionReference inputUndoWordSelection;
+    [SerializeField] private RectTransform sentenceContainer;
+    [SerializeField] private LayerMask wordLayerMask;
+    private List<LanguageWord> currentWordsInSentence = new List<LanguageWord>();
 
     private float currentTimeInSeconds;
 
@@ -104,6 +107,16 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
         }
 
         return false;
+    }
+
+    private void AddWordToSentence(LanguageWord localLanguageWord)
+    {
+        
+    }
+
+    private void RemoveWordFromSentence(LanguageWord localLanguageWord)
+    {
+        
     }
 
     public void SetIConversable(IConversable conversable)
