@@ -12,8 +12,8 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
     [SerializeField] private InputActionReference inputClickOnThings;
     [SerializeField] private InputActionReference inputUndoWordSelection;
     [SerializeField] private RectTransform sentenceContainer;
-    [SerializeField] private LayerMask wordLayerMask;
-    private List<LanguageWord> currentWordsInSentence = new List<LanguageWord>();
+    private GameObject canvasSentenceBuilder => sentenceContainer.gameObject;
+    private List<WordBehaviour> currentWordsInSentence = new ();
 
     private float currentTimeInSeconds;
 
@@ -58,12 +58,20 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
     private void OnInputActionClickOnThings(InputAction.CallbackContext context)
     {
         Debug.Log("WORD AHHH");
-        if (!IsWordClickedOn(out LanguageWord foundWord)) return;
+        if (!IsWordClickedOn(out WordBehaviour foundWord)) return;
+        
+        Debug.Log("Found Word: " + foundWord.word.presentedWord);
+        
+        
     }
 
     private void OnInputActionUndoWordSelection(InputAction.CallbackContext context)
     {
-        if (!IsWordClickedOn(out LanguageWord foundWord)) return;
+        if (!IsWordClickedOn(out WordBehaviour foundWord)) return;
+        
+        Debug.Log("A word has been found");
+        
+        if (!IsWordInSentence(foundWord)) return;
     }
 
     public void ExitState()
@@ -85,38 +93,50 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
            -   */
     }
 
-    private bool IsWordClickedOn(out LanguageWord foundLanguageWord)
+    private bool IsWordClickedOn(out WordBehaviour foundWord)
     {
-        foundLanguageWord = null;
+        foundWord = null;
         Vector2 mousePosition = Mouse.current.position.value;
         
         // ??? What is this Line?
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+        PointerEventData pointerEventData = new (EventSystem.current)
         {
             position = mousePosition
         };
-        List<RaycastResult> results = new List<RaycastResult>();
+        List<RaycastResult> results = new ();
         EventSystem.current.RaycastAll(pointerEventData, results);
 
         foreach (RaycastResult raycastResult in results)
         {
-            if (!raycastResult.gameObject.TryGetComponent<WordBehaviour>(out var word)) continue;
+            if (!raycastResult.gameObject.TryGetComponent<WordBehaviour>(out WordBehaviour word)) continue;
             
-            foundLanguageWord = word.languageWord;
+            foundWord = word;
             return true;
         }
 
         return false;
     }
 
-    private void AddWordToSentence(LanguageWord localLanguageWord)
+    private void AddWordToSentence(WordBehaviour localWord)
     {
-        
+        /* TODO:
+            Add Word to the end of the sentence.
+            The same word can be added an infinite amount of times.
+            */
     }
 
-    private void RemoveWordFromSentence(LanguageWord localLanguageWord)
+    private void RemoveWordFromSentence(WordBehaviour localWord)
     {
-        
+        /* TODO:
+            Check if the position or rather the word selected is not just existent in the sentence, but actually a direct reference to the object in the list. (Because we instantiate words)
+            If so then we can safely remove that word from that index position
+            All words, which come after the removed word, will be moved one up in index
+            */
+    }
+
+    private bool IsWordInSentence(WordBehaviour localWord)
+    {
+        return currentWordsInSentence.Contains(localWord);
     }
 
     public void SetIConversable(IConversable conversable)

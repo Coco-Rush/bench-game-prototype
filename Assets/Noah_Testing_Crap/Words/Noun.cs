@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Noun", menuName = "Scriptable Objects/Noun")]
-public class Noun : LanguageWord
+public class Noun : Word
 {
     
 }

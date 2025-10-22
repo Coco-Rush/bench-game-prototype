@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WordBehaviour : MonoBehaviour
 {
-    public LanguageWord languageWord { get; private set; }
+    public Word word { get; private set; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
