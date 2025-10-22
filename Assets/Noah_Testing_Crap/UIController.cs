@@ -11,7 +11,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject highlightInteract;
     [SerializeField] private GameObject highlightListen;
     [SerializeField] private GameObject highlightTalk;
-    [SerializeField] private TextMeshProUGUI speechTMPForSpeechInBubble;
+    [SerializeField] private TextMeshProUGUI speechTMPForChitChat;
+    [SerializeField] private TextMeshProUGUI speechTMPForPrompt;
 
     private GameObject instantiatedHighlightInspect;
     private GameObject instantiatedHighlightInteract;
@@ -95,8 +96,13 @@ public class UIController : MonoBehaviour
         
     }
 
-    public void InsertTextForTMP(string followingText)
+    public static void InsertTextForTMP(string followingText)
     {
-        speechTMPForSpeechInBubble.text = followingText;
+        instance.speechTMPForChitChat.text = followingText;
+    }
+
+    public static void InsertPromptTextForTMP(string followingText)
+    {
+        instance.speechTMPForPrompt.text = followingText;
     }
 }

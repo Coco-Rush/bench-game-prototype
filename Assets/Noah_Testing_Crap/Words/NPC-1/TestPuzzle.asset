@@ -20,3 +20,47 @@ MonoBehaviour:
   - This is a puzzle.
   - Try to guess my sentence.
   timelimitForPuzzleInSeconds: 60
+  isSolved: 0
+  showThisWhenPuzzleSolved:
+  - Wow u did it
+  - Bet u feel smart huh
+  - Well
+  - Hate to break it to you
+  - But i know u only have four words
+  - that's right
+  - You're not smart
+  - you're just not
+  - I mean i'm not trying to be mean here
+  - You're just not smart though
+  - Anyone could've gotten that
+  - I mean c'mon
+  - Four words?
+  - And i even said
+  - '"The answer is be + laugh"'
+  - And two of the words were "be" and "laugh".
+  - It's just not that impressive
+  - Like yeah you "solved" the puzzle
+  - I'll give you that
+  - Not anyone did
+  - But you did
+  - So
+  - Good on you
+  - But that doesn't mean much in comparison
+  - I mean
+  - Compared to the ones who didn't solve the puzzle
+  - I guess you would be smart
+  - Huh...
+  - Nahh, you wouldn't
+  - That just means you're less stupid
+  - But that's okay
+  - Anyways what're you doing
+  - Go back to work or smth
+  - Think about the billionaire you work for
+  - He's losing dollars or whatever currency it is
+  - If the billionaire loses dollars...
+  - ...Everyone else would get more
+  - We don't want that to happen now, do we?
+  showThisWhenResponseOfPlayerIsFalse: I don't understand what u mean lil bro.
+  showThisWhenTimeOfPuzzleRunsOut: U stoopid. U take too long to think...if u even
+    think lmoa.
+  showThisAsPuzzlePrompt: The answer is be + laugh.

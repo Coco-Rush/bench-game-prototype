@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Verb", menuName = "Scriptable Objects/Verb")]
-public class Verb : Word
+public class Verb : LanguageWord
 {
     public string singularFirst;
     public string singularSecond;

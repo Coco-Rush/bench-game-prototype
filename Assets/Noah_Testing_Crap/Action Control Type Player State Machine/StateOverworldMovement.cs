@@ -148,13 +148,13 @@ public class StateOverworldMovement : MonoBehaviour, IControlTypeState
         
         if (currentConversable.StartChitChat())
         {
-            // Show Speech Bubble
+            // TODO Delegate a function that shows all the correct UI Elements
             uiController.ShowSpeechBubble();
             uiController.HideUIElementInspect();
             uiController.HideUIElementInteract();
             uiController.HideUIElementTalk();
             uiController.HideUIElementListen();
-            // Switch Action Type State to "ChitChatting"
+            
             ActorControlTypeStateMachine.ChangeStateToListening(currentConversable);
         }
         else
@@ -166,15 +166,25 @@ public class StateOverworldMovement : MonoBehaviour, IControlTypeState
     private void OnInputActionPerformedInputTalking(InputAction.CallbackContext context)
     {
         if (currentConversable.IsUnityNull()) return;
+        
+        uiController.ShowSpeechBubble();
+        uiController.HideUIElementInspect();
+        uiController.HideUIElementInteract();
+        uiController.HideUIElementTalk();
+        uiController.HideUIElementListen();
+        
+        ActorControlTypeStateMachine.ChangeStateToTalking(currentConversable);
     }
 
     public void ExitState()
     {
+        // TODO Get all Active UI Elements and deactivate them
         enabled = false;
     }
 
     public void EnterState()
     {
+        // TODO Get all UI Elements that were active before deactivation and re-activate them
         enabled = true;
     }
 }

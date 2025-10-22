@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public interface IConversable
 {
    // A Conversable Object has the ability to do some ChitChat and be able to give Talking/Prompts to where the player can give a response
    //void LoadChitChat();
+   public UnityEvent TimeRunsOut { get; set; }
    bool StartChitChat();
    bool NextChitChat();
 
-   void StartTalkPrompt();
+   bool StartTalkPrompt();
    bool TryResponse();
 }

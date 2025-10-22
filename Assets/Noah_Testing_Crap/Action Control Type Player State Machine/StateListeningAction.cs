@@ -63,10 +63,7 @@ public class StateListeningAction : MonoBehaviour, IControlTypeState
 
     private void OnInputActionStartedToNextChitChat(InputAction.CallbackContext context)
     {
-        Debug.Log(context.action + " started ChitChat/Does Next Chit Chat");
         if (currentConversable.NextChitChat()) return;
-        // No more chit chat
-        // Hide Speech Bubble?
         UIController.instance.HideSpeechBubble();
         ActorControlTypeStateMachine.ChangeStateToOverworldMovement();
     }

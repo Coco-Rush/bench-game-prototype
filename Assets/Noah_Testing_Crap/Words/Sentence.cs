@@ -3,5 +3,5 @@ using UnityEngine;
 
 public class Sentence
 {
-    public List<Word> words;
+    public List<LanguageWord> words;
 }

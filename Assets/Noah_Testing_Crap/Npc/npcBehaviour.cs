@@ -1,32 +1,34 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
 {
+    public UnityEvent TimeRunsOut { get; set; }
+    
     [SerializeField] private List<Puzzle> puzzles;
-
     private Puzzle currentPuzzle;
-
     private int indexChitChat;
+    private float currentTimeInSeconds;
 
 
-    // delegate of funciton?
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // delegate of function?
+    private void Start()
     {
+        TimeRunsOut = new UnityEvent();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
 
     public void Inspect()
     {
         Debug.Log("You inspected " + gameObject.name);
     }
+
+    
 
     public bool StartChitChat()
     {
@@ -37,26 +39,34 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
             return false;
         
         
-        PlayChitChat(currentPuzzle.chitChatListForEachPuzzle[indexChitChat]);
+        PlayChitChat(currentPuzzle.GetChitChat(indexChitChat));
         return true;
     }
 
     public bool NextChitChat()
     {
-        if (indexChitChat + 1 >= currentPuzzle.chitChatListForEachPuzzle.Count)
+        if (indexChitChat + 1 >= currentPuzzle.GetChitChatCount())
         {
             PlayChitChat("");
             return false;
         }
 
         indexChitChat += 1;
-        PlayChitChat(currentPuzzle.chitChatListForEachPuzzle[indexChitChat]);
+        PlayChitChat(currentPuzzle.GetChitChat(indexChitChat));
         return true;
     }
 
-    public void StartTalkPrompt()
+    public bool StartTalkPrompt()
     {
-        throw new System.NotImplementedException();
+        currentPuzzle = GetCurrentPuzzle(puzzles);
+
+        if (currentPuzzle.IsUnityNull())
+            return false;
+
+        UIController.InsertPromptTextForTMP(currentPuzzle.GetPuzzlePrompt());
+        currentTimeInSeconds = currentPuzzle.timeLimit;
+        return true;
+        
     }
 
     public bool TryResponse()
@@ -74,7 +84,7 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
     private void PlayChitChat(string playThis)
     {
         // have string appear every character per frame?
-        UIController.instance.InsertTextForTMP(playThis);
+        UIController.InsertTextForTMP(playThis);
         
     }
 }
