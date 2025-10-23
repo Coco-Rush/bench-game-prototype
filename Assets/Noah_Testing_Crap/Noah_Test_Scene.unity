@@ -715,6 +715,10 @@ PrefabInstance:
       propertyPath: overworldMovement
       value: 
       objectReference: {fileID: 230778466}
+    - target: {fileID: 6101165244098479258, guid: b5d6af6717a23704bb31fb9e0f265e0e, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8111950507492194374, guid: b5d6af6717a23704bb31fb9e0f265e0e, type: 3}
       propertyPath: targetTransform
       value: 
@@ -731,6 +735,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9028817651988108542, guid: b5d6af6717a23704bb31fb9e0f265e0e, type: 3}
+      propertyPath: wordsCollected.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028817651988108542, guid: b5d6af6717a23704bb31fb9e0f265e0e, type: 3}
+      propertyPath: 'wordsCollected.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d47db8a4278f13c0bae43291178daf41, type: 2}
+    - target: {fileID: 9028817651988108542, guid: b5d6af6717a23704bb31fb9e0f265e0e, type: 3}
+      propertyPath: 'wordsCollected.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e0c5d3a02d90e5f29d97b81889f0a73, type: 2}
+    - target: {fileID: 9028817651988108542, guid: b5d6af6717a23704bb31fb9e0f265e0e, type: 3}
+      propertyPath: 'wordsCollected.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b21f016b6e2dfd62989e256bdeee77d8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

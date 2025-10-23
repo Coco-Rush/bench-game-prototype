@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,10 +11,13 @@ using Random = System.Random;
 public class StateTalkingAction : MonoBehaviour, IControlTypeState
 {
     [SerializeField] private InputActionReference inputClickOnThings;
-    [SerializeField] private InputActionReference inputUndoWordSelection;
-    [SerializeField] private RectTransform sentenceContainer;
-    private GameObject canvasSentenceBuilder => sentenceContainer.gameObject;
-    private List<WordBehaviour> currentWordsInSentence = new ();
+    [SerializeField] private RectTransform sentenceContainerRectangle;
+    [SerializeField] private RectTransform wordSelectorRectangle;
+    [SerializeField] private GameObject emptyUIGameObject;
+    private GameObject sentenceContainerPanel => sentenceContainerRectangle.gameObject;
+    private GameObject wordSelectorPanel => wordSelectorRectangle.gameObject;
+    private List<WordBehaviour> currentSentence;
+    private List<WordBehaviour> currentWordsThatCanBeSelected;
 
     private float currentTimeInSeconds;
 
@@ -22,20 +26,47 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
     private void OnEnable()
     {
         inputClickOnThings.action.Enable();
-        inputUndoWordSelection.action.Enable();
-
         inputClickOnThings.action.performed += OnInputActionClickOnThings;
-        inputUndoWordSelection.action.performed += OnInputActionUndoWordSelection;
+        
+        currentSentence = new List<WordBehaviour>();
+        currentWordsThatCanBeSelected = new List<WordBehaviour>();
+        sentenceContainerPanel.SetActive(true);
+        wordSelectorPanel.SetActive(true);
+        
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        /* TODO:
+           - Show the space of where "Words" can be dragged to
+           - Show all the words the player has now
+           -   */
+        float yOffset = 0f;
+        foreach (Word word in ActorManager.GetAllWordsPlayerHasCollected())
+        {
+            WordBehaviour currEmptyWord = Instantiate(emptyUIGameObject, wordSelectorRectangle).AddComponent<WordBehaviour>();
+            currEmptyWord.SetWord(word);
+            RectTransform currRect = currEmptyWord.GetComponent<RectTransform>();
+            currRect.anchoredPosition = new Vector2(0, yOffset);
+            yOffset += currRect.rect.height + 5f;
+            currEmptyWord.GetComponent<TextMeshProUGUI>().text = currEmptyWord.word.presentedWord;
+            
+            currentWordsThatCanBeSelected.Add(currEmptyWord);
+        }
 
     }
 
     private void OnDisable()
     {
-        inputClickOnThings.action.performed -= OnInputActionClickOnThings;
-        inputUndoWordSelection.action.performed -= OnInputActionUndoWordSelection;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        currentConversable = null;
+        currentSentence.Clear();
+        currentWordsThatCanBeSelected.Clear();
         
+        sentenceContainerPanel.SetActive(false);
+        wordSelectorPanel.SetActive(false);
+        
+        inputClickOnThings.action.performed -= OnInputActionClickOnThings;
         inputClickOnThings.action.Disable();
-        inputUndoWordSelection.action.Disable();
     }
 
     private void Awake()
@@ -57,40 +88,28 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
 
     private void OnInputActionClickOnThings(InputAction.CallbackContext context)
     {
-        Debug.Log("WORD AHHH");
         if (!IsWordClickedOn(out WordBehaviour foundWord)) return;
         
         Debug.Log("Found Word: " + foundWord.word.presentedWord);
+        if (currentSentence.Contains(foundWord))
+        {
+            currentSentence.Remove(foundWord);
+            Destroy(foundWord.gameObject);
+        }
+        else
+            currentSentence.Add(Instantiate(foundWord, sentenceContainerRectangle));
         
-        
-    }
-
-    private void OnInputActionUndoWordSelection(InputAction.CallbackContext context)
-    {
-        if (!IsWordClickedOn(out WordBehaviour foundWord)) return;
-        
-        Debug.Log("A word has been found");
-        
-        if (!IsWordInSentence(foundWord)) return;
+        WordPositionsInSentence();
     }
 
     public void ExitState()
     {
         enabled = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        currentConversable = null;
     }
 
     public void EnterState()
     {
         enabled = true;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        /* TODO:
-           - Show the space of where "Words" can be dragged to
-           - Show all the words the player has now
-           -   */
     }
 
     private bool IsWordClickedOn(out WordBehaviour foundWord)
@@ -98,11 +117,11 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
         foundWord = null;
         Vector2 mousePosition = Mouse.current.position.value;
         
-        // ??? What is this Line?
         PointerEventData pointerEventData = new (EventSystem.current)
         {
             position = mousePosition
         };
+        
         List<RaycastResult> results = new ();
         EventSystem.current.RaycastAll(pointerEventData, results);
 
@@ -117,26 +136,26 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
         return false;
     }
 
-    private void AddWordToSentence(WordBehaviour localWord)
+    private void WordPositionsInSentence()
     {
         /* TODO:
-            Add Word to the end of the sentence.
-            The same word can be added an infinite amount of times.
-            */
-    }
-
-    private void RemoveWordFromSentence(WordBehaviour localWord)
-    {
-        /* TODO:
-            Check if the position or rather the word selected is not just existent in the sentence, but actually a direct reference to the object in the list. (Because we instantiate words)
-            If so then we can safely remove that word from that index position
-            All words, which come after the removed word, will be moved one up in index
-            */
-    }
-
-    private bool IsWordInSentence(WordBehaviour localWord)
-    {
-        return currentWordsInSentence.Contains(localWord);
+            Position all the words in the sentence.
+            This Method is called after adding or removing words from the sentence.
+            xoffset shouldnt be bigger than width of the panel - rectangle width halved
+            if it is bigger then continue with 0 one rectangle height below.*/
+        float xOffset = 20f;
+        int index = 1;
+        
+        foreach (WordBehaviour wordBehaviour in currentSentence)
+        {
+            RectTransform rectangle = wordBehaviour.GetComponent<RectTransform>();
+            
+            rectangle.anchoredPosition = new Vector2(
+            index * rectangle.rect.width * 0.5f + xOffset, 
+            0);
+            
+            index++;
+        }
     }
 
     public void SetIConversable(IConversable conversable)
@@ -147,5 +166,10 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
     public void OnTimeRunOut()
     {
         
+    }
+
+    public void IsSentenceWrittenCorrect()
+    {
+        Debug.Log("Rair");
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WordBehaviour : MonoBehaviour
 {
-    public Word word { get; private set; }
+    public Word word;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,5 +13,11 @@ public class WordBehaviour : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetWord(Word localWord)
+    {
+        if (!word)
+            word = localWord;
     }
 }
