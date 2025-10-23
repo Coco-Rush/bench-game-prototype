@@ -5,7 +5,7 @@ using UnityEngine;
 public class Puzzle : ScriptableObject
 {
     // Sentence
-    [SerializeField] private List<Word> correctWords;
+    [SerializeField] private Sentence correctSentence;
     [SerializeField] private List<string> chitChatListForEachPuzzle;
     
     [SerializeField] private float timelimitForPuzzleInSeconds;
@@ -18,9 +18,19 @@ public class Puzzle : ScriptableObject
     [SerializeField] private string showThisWhenTimeOfPuzzleRunsOut;
     [SerializeField] private string showThisAsPuzzlePrompt;
     
-    public IReadOnlyList<Word> GetSolutionSentence()
+    public IReadOnlyList<Word> GetSolutionWords()
     {
+        List<Word> correctWords = new ();
+        foreach (Word sentenceWord in correctSentence.words)
+        {
+            correctWords.Add(sentenceWord);
+        }
         return correctWords;
+    }
+
+    public Sentence GetSolutionSentence()
+    {
+        return correctSentence;
     }
 
     public IReadOnlyList<string> GetTextForWhenPuzzleIsSolved()

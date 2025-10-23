@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,5 +11,5 @@ public interface IConversable
    bool NextChitChat();
 
    bool StartTalkPrompt();
-   bool TryResponse();
+   bool TryResponse(List<Word> sentence);
 }

@@ -170,6 +170,11 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
 
     public void IsSentenceWrittenCorrect()
     {
-        Debug.Log("Rair");
+        List<Word> words = new();
+        foreach (WordBehaviour wordBehaviour in currentSentence)
+        {
+            words.Add(wordBehaviour.word);
+        }
+        currentConversable.TryResponse(words);
     }
 }

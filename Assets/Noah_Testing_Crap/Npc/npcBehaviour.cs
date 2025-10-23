@@ -69,9 +69,15 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
         
     }
 
-    public bool TryResponse()
+    public bool TryResponse(List<Word> tryWords)
     {
-        throw new System.NotImplementedException();
+        if (tryWords.Count != currentPuzzle.GetSolutionSentence().words.Count) return false;
+        
+        foreach (Word solutionWord in currentPuzzle.GetSolutionWords())
+        {
+        }
+
+        return true;
     }
 
     private Puzzle GetCurrentPuzzle(List<Puzzle> localPuzzles, int index = 0)

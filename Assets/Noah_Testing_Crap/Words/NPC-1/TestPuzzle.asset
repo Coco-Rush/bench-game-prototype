@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db05f9a781e2e2b96807a57f2087eead, type: 3}
   m_Name: TestPuzzle
   m_EditorClassIdentifier: 
-  words:
-  - {fileID: 11400000, guid: d47db8a4278f13c0bae43291178daf41, type: 2}
-  - {fileID: 11400000, guid: b21f016b6e2dfd62989e256bdeee77d8, type: 2}
+  correctSentence: {fileID: 11400000, guid: 85d58137fd9514040abb1d7de1f5bb33, type: 2}
   chitChatListForEachPuzzle:
   - THis is my puzzle.
   - This is a puzzle.
