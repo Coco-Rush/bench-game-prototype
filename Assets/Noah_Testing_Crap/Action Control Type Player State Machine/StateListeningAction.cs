@@ -70,7 +70,8 @@ public class StateListeningAction : MonoBehaviour, IControlTypeState
 
     private void OnInputActionStartedSpeedUpText(InputAction.CallbackContext context)
     {
-        
+        currentConversable.StartSolutionChitChat();
+        ActorControlTypeStateMachine.ChangeStateToListening(currentConversable);
     }
 
     private void OnInputActionCanceledSpeedUpText(InputAction.CallbackContext context)

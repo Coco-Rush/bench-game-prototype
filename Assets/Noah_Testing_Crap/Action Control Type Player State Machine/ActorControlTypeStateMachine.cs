@@ -61,6 +61,5 @@ public class ActorControlTypeStateMachine : MonoBehaviour
         instance.ChangeState(instance.talkingAction);
         instance.talkingAction.SetIConversable(currentConversable);
         Debug.Log(currentConversable);
-        currentConversable.TimeRunsOut.AddListener(instance.talkingAction.OnTimeRunOut);
     }
 }

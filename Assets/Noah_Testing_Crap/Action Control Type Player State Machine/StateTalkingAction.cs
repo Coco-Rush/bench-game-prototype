@@ -168,13 +168,16 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
         
     }
 
-    public void IsSentenceWrittenCorrect()
+    public void OnRespond()
     {
-        List<Word> words = new();
-        foreach (WordBehaviour wordBehaviour in currentSentence)
+        Debug.Log("Button Clicked OnRespond");
+        // currentSentence.ConvertAll(x => x.word).ForEach(x => Debug.Log(x.presentedWord));
+        if (currentConversable.TryResponse(currentSentence.ConvertAll(x => x.word)))
         {
-            words.Add(wordBehaviour.word);
+            currentConversable.StartSolutionChitChat();
+            ActorControlTypeStateMachine.ChangeStateToListening(currentConversable);
         }
-        currentConversable.TryResponse(words);
+        else
+            Debug.Log("Words are wrong");
     }
 }

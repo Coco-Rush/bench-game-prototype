@@ -1,12 +1,11 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
 {
-    public UnityEvent TimeRunsOut { get; set; }
-    
     [SerializeField] private List<Puzzle> puzzles;
     private Puzzle currentPuzzle;
     private int indexChitChat;
@@ -16,7 +15,6 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
     // delegate of function?
     private void Start()
     {
-        TimeRunsOut = new UnityEvent();
     }
 
     private void Update()
@@ -36,7 +34,10 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
         indexChitChat = 0;
 
         if (currentPuzzle.IsUnityNull())
+        {
+            currentPuzzle = puzzles[^1];
             return false;
+        }
         
         
         PlayChitChat(currentPuzzle.GetChitChat(indexChitChat));
@@ -45,15 +46,32 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
 
     public bool NextChitChat()
     {
-        if (indexChitChat + 1 >= currentPuzzle.GetChitChatCount())
+        if (currentPuzzle.isSolved)
         {
-            PlayChitChat("");
-            return false;
+            // Should show the SoluitonDialogo
+            if (indexChitChat + 1 >= currentPuzzle.GetCountDialogPuzzleSolved())
+            {
+                PlayChitChat("");
+                return false;
+            }
+
+            indexChitChat += 1;
+            PlayChitChat(currentPuzzle.GetTextForWhenPuzzleIsSolved()[indexChitChat]);
+        }
+        else
+        {
+            if (indexChitChat + 1 >= currentPuzzle.GetChitChatCount())
+            {
+                PlayChitChat("");
+                return false;
+            }
+
+            indexChitChat += 1;
+            PlayChitChat(currentPuzzle.GetChitChat(indexChitChat));
         }
 
-        indexChitChat += 1;
-        PlayChitChat(currentPuzzle.GetChitChat(indexChitChat));
         return true;
+
     }
 
     public bool StartTalkPrompt()
@@ -71,13 +89,25 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
 
     public bool TryResponse(List<Word> tryWords)
     {
-        if (tryWords.Count != currentPuzzle.GetSolutionSentence().words.Count) return false;
-        
-        foreach (Word solutionWord in currentPuzzle.GetSolutionWords())
+        Debug.Log("Enter TryResponse(List<Word>) of: " + gameObject.name);
+        if (tryWords.Count != currentPuzzle.GetSolutionWords().Count) return false;
+
+        for (int i = 0; i < tryWords.Count; i++)
         {
+            if (tryWords[i].Equals(currentPuzzle.GetSolutionWords()[i])) continue;
+            Debug.Log("Words are false");
+            return false;
         }
 
+        currentPuzzle.isSolved = true;
+        Debug.Log("Words are correct");
         return true;
+    }
+
+    public void StartSolutionChitChat()
+    {
+        indexChitChat = 0;
+        PlayChitChat(currentPuzzle.GetTextForWhenPuzzleIsSolved()[indexChitChat]);
     }
 
     private Puzzle GetCurrentPuzzle(List<Puzzle> localPuzzles, int index = 0)

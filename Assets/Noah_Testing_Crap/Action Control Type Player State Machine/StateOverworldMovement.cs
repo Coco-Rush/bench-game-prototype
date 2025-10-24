@@ -152,7 +152,8 @@ public class StateOverworldMovement : MonoBehaviour, IControlTypeState
     {
         if (currentConversable.IsUnityNull()) return;
 
-        if (!currentConversable.StartChitChat()) return;
+        if (!currentConversable.StartChitChat())
+            currentConversable.StartSolutionChitChat(); 
 
         // TODO Delegate a function that shows all the correct UI Elements
         uiController.ShowSpeechBubble();

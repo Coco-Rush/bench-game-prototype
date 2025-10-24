@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Puzzle", menuName = "Scriptable Objects/Puzzle")]
@@ -6,17 +7,17 @@ public class Puzzle : ScriptableObject
 {
     // Sentence
     [SerializeField] private Sentence correctSentence;
-    [SerializeField] private List<string> chitChatListForEachPuzzle;
+    [SerializeField] private List<string> dialogChitChat;
     
     [SerializeField] private float timelimitForPuzzleInSeconds;
     public float timeLimit => timelimitForPuzzleInSeconds;
 
     // isPuzzleSolved?
-    [HideInInspector] public bool isSolved;
-    [SerializeField] private List<string> showThisWhenPuzzleSolved;
-    [SerializeField] private string showThisWhenResponseOfPlayerIsFalse;
-    [SerializeField] private string showThisWhenTimeOfPuzzleRunsOut;
-    [SerializeField] private string showThisAsPuzzlePrompt;
+    public bool isSolved;
+    [SerializeField] private List<string> dialogPuzzleSolved;
+    [SerializeField] private string dialogResponseFalse;
+    [SerializeField] private string dialogTimeRunOut;
+    [SerializeField] private string dialogPuzzlePrompt;
     
     public IReadOnlyList<Word> GetSolutionWords()
     {
@@ -33,23 +34,28 @@ public class Puzzle : ScriptableObject
         return correctSentence;
     }
 
-    public IReadOnlyList<string> GetTextForWhenPuzzleIsSolved()
+    public ReadOnlyCollection<string> GetTextForWhenPuzzleIsSolved()
     {
-        return showThisWhenPuzzleSolved;
+        return dialogPuzzleSolved.AsReadOnly();
+    }
+
+    public int GetCountDialogPuzzleSolved()
+    {
+        return dialogPuzzleSolved.Count;
     }
 
     public string GetChitChat(int index)
     {
-        return chitChatListForEachPuzzle[index];
+        return dialogChitChat[index];
     }
 
     public int GetChitChatCount()
     {
-        return chitChatListForEachPuzzle.Count;
+        return dialogChitChat.Count;
     }
 
     public string GetPuzzlePrompt()
     {
-        return showThisAsPuzzlePrompt;
+        return dialogPuzzlePrompt;
     }
 }
