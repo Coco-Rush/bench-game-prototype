@@ -76,11 +76,16 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
 
     public bool StartTalkPrompt()
     {
+
         currentPuzzle = GetCurrentPuzzle(puzzles);
+        indexChitChat = 0;
 
         if (currentPuzzle.IsUnityNull())
+        {
+            currentPuzzle = puzzles[^1];
             return false;
-
+        }
+        
         UIController.InsertPromptTextForTMP(currentPuzzle.GetPuzzlePrompt());
         currentTimeInSeconds = currentPuzzle.timeLimit;
         return true;
