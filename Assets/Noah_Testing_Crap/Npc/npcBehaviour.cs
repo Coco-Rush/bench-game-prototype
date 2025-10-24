@@ -48,7 +48,6 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
     {
         if (currentPuzzle.isSolved)
         {
-            // Should show the SoluitonDialogo
             if (indexChitChat + 1 >= currentPuzzle.GetCountDialogPuzzleSolved())
             {
                 PlayChitChat("");
@@ -105,6 +104,7 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
         }
 
         currentPuzzle.isSolved = true;
+        UIController.InsertPromptTextForTMP("");
         Debug.Log("Words are correct");
         return true;
     }
