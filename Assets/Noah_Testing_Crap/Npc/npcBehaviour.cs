@@ -91,9 +91,9 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
         
     }
 
-    public bool TryResponse(List<Word> tryWords)
+    public bool TryResponse(List<WordData> tryWords)
     {
-        Debug.Log("Enter TryResponse(List<Word>) of: " + gameObject.name);
+        Debug.Log("Enter TryResponse(List<WordData>) of: " + gameObject.name);
         if (tryWords.Count != currentPuzzle.GetSolutionWords().Count) return false;
 
         for (int i = 0; i < tryWords.Count; i++)
@@ -102,6 +102,9 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
             Debug.Log("Words are false");
             return false;
         }
+        
+        currentPuzzle.GetSolutionSentence().SetSentence();
+        Debug.Log(currentPuzzle.GetSolutionSentence().finalSentence);
 
         currentPuzzle.isSolved = true;
         UIController.InsertPromptTextForTMP("");
@@ -113,6 +116,12 @@ public class NpcBehaviour : MonoBehaviour, IInspectable,IConversable
     {
         indexChitChat = 0;
         PlayChitChat(currentPuzzle.GetTextForWhenPuzzleIsSolved()[indexChitChat]);
+    }
+
+    public Sentence GetSolutionSentence()
+    {
+        Debug.Log(currentPuzzle.GetSolutionSentence().tense);
+        return currentPuzzle.GetSolutionSentence();
     }
 
     private Puzzle GetCurrentPuzzle(List<Puzzle> localPuzzles, int index = 0)

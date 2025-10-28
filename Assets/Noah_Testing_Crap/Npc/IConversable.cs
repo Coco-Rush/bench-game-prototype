@@ -10,6 +10,7 @@ public interface IConversable
    bool NextChitChat();
 
    bool StartTalkPrompt();
-   bool TryResponse(List<Word> sentence);
+   bool TryResponse(List<WordData> sentence);
    void StartSolutionChitChat();
+   Sentence GetSolutionSentence();
 }

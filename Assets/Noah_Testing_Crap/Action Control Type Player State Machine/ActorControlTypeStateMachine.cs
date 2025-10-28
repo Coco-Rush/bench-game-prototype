@@ -47,8 +47,8 @@ public class ActorControlTypeStateMachine : MonoBehaviour
 
     public static void ChangeStateToListening(IConversable currentConversable)
     {
-        instance.ChangeState(instance.listeningAction);
         instance.listeningAction.SetIConversable(currentConversable);
+        instance.ChangeState(instance.listeningAction);
     }
 
     public static void ChangeStateToOverworldMovement()
@@ -58,8 +58,8 @@ public class ActorControlTypeStateMachine : MonoBehaviour
 
     public static void ChangeStateToTalking(IConversable currentConversable)
     {
-        instance.ChangeState(instance.talkingAction);
         instance.talkingAction.SetIConversable(currentConversable);
+        instance.ChangeState(instance.talkingAction);
         Debug.Log(currentConversable);
     }
 }

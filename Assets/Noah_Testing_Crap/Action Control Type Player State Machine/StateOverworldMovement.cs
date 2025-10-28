@@ -144,7 +144,8 @@ public class StateOverworldMovement : MonoBehaviour, IControlTypeState
     private void OnInputActionPerformedInputInspecting(InputAction.CallbackContext context)
     {
         if (currentInspectable.IsUnityNull()) return;
-        // Inspect Object -> Gain new word in dictionary
+        // Inspect Object -> Gain new wordData in dictionary
+        currentInspectable.Inspect();
         // Should
     }
 

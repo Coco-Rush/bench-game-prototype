@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using Random = System.Random;
+using UnityEngine.UI;
 
 public class StateTalkingAction : MonoBehaviour, IControlTypeState
 {
@@ -14,10 +11,13 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
     [SerializeField] private RectTransform sentenceContainerRectangle;
     [SerializeField] private RectTransform wordSelectorRectangle;
     [SerializeField] private GameObject emptyUIGameObject;
+    [SerializeField] private RectTransform sentenceBuildingCanvas;
     private GameObject sentenceContainerPanel => sentenceContainerRectangle.gameObject;
     private GameObject wordSelectorPanel => wordSelectorRectangle.gameObject;
     private List<WordBehaviour> currentSentence;
     private List<WordBehaviour> currentWordsThatCanBeSelected;
+    private Tense solutionTense;
+    private Pronoun solutionPronoun;
 
     private float currentTimeInSeconds;
 
@@ -25,33 +25,28 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
 
     private void OnEnable()
     {
+        sentenceBuildingCanvas.gameObject.SetActive(true);
+        
         inputClickOnThings.action.Enable();
         inputClickOnThings.action.performed += OnInputActionClickOnThings;
         
         currentSentence = new List<WordBehaviour>();
         currentWordsThatCanBeSelected = new List<WordBehaviour>();
-        sentenceContainerPanel.SetActive(true);
-        wordSelectorPanel.SetActive(true);
         
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        /* TODO:
-           - Show the space of where "Words" can be dragged to
-           - Show all the words the player has now
-           -   */
-        float yOffset = 0f;
-        foreach (Word word in ActorManager.GetAllWordsPlayerHasCollected())
+        
+        foreach (WordData word in ActorManager.GetAllWordsPlayerHasCollected())
         {
             WordBehaviour currEmptyWord = Instantiate(emptyUIGameObject, wordSelectorRectangle).AddComponent<WordBehaviour>();
             currEmptyWord.SetWord(word);
-            RectTransform currRect = currEmptyWord.GetComponent<RectTransform>();
-            currRect.anchoredPosition = new Vector2(0, yOffset);
-            yOffset += currRect.rect.height + 5f;
-            currEmptyWord.GetComponent<TextMeshProUGUI>().text = currEmptyWord.word.presentedWord;
+            currEmptyWord.GetComponent<TextMeshProUGUI>().text = currEmptyWord.wordData.presentedWord;
             
             currentWordsThatCanBeSelected.Add(currEmptyWord);
         }
-
+        
+        solutionTense = currentConversable.GetSolutionSentence().tense;
+        solutionPronoun = currentConversable.GetSolutionSentence().pronoun;
     }
 
     private void OnDisable()
@@ -59,14 +54,20 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         currentConversable = null;
-        currentSentence.Clear();
-        currentWordsThatCanBeSelected.Clear();
         
-        sentenceContainerPanel.SetActive(false);
-        wordSelectorPanel.SetActive(false);
+        currentWordsThatCanBeSelected.ForEach(behaviour => Destroy(behaviour.gameObject));
+        currentSentence.ForEach(behaviour => Destroy(behaviour.gameObject));
+        
+        currentWordsThatCanBeSelected.Clear();
+        currentSentence.Clear();
+        
+        currentWordsThatCanBeSelected.TrimExcess();
+        currentSentence.TrimExcess();
         
         inputClickOnThings.action.performed -= OnInputActionClickOnThings;
         inputClickOnThings.action.Disable();
+        
+        sentenceBuildingCanvas.gameObject.SetActive(false);
     }
 
     private void Awake()
@@ -90,7 +91,7 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
     {
         if (!IsWordClickedOn(out WordBehaviour foundWord)) return;
         
-        Debug.Log("Found Word: " + foundWord.word.presentedWord);
+        Debug.Log("Found WordData: " + foundWord.wordData.presentedWord);
         if (currentSentence.Contains(foundWord))
         {
             currentSentence.Remove(foundWord);
@@ -98,6 +99,8 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
         }
         else
             currentSentence.Add(Instantiate(foundWord, sentenceContainerRectangle));
+            
+        // TODO: check if its a verb and conjugate the verb
         
         WordPositionsInSentence();
     }
@@ -139,28 +142,39 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
     private void WordPositionsInSentence()
     {
         /* TODO:
-            Position all the words in the sentence.
-            This Method is called after adding or removing words from the sentence.
-            xoffset shouldnt be bigger than width of the panel - rectangle width halved
-            if it is bigger then continue with 0 one rectangle height below.*/
+         - width of word behaviour should depend on the length of the word in the text.
+         */
+            
         float xOffset = 20f;
         int index = 1;
+        float xPosition = xOffset;
         
         foreach (WordBehaviour wordBehaviour in currentSentence)
         {
-            RectTransform rectangle = wordBehaviour.GetComponent<RectTransform>();
-            
-            rectangle.anchoredPosition = new Vector2(
-            index * rectangle.rect.width * 0.5f + xOffset, 
-            0);
-            
-            index++;
+            // RectTransform rectangle = wordBehaviour.GetComponent<RectTransform>();
+            //
+            // rectangle.anchoredPosition = new Vector2(xPosition, 0);
+            // xPosition += rectangle.rect.width + xOffset;
+            //
+            // index++;
+
+            if (wordBehaviour.wordData is VerbData verbData)
+            {
+                if (wordBehaviour.TryGetComponent(out TextMeshProUGUI tmpUGUI))
+                {
+                    tmpUGUI.text = VerbConjugator.Conjugate(verbData, solutionTense, solutionPronoun);
+                    // rectangle.rect. = new Vector2(tmpUGUI.text.Length * 10f, rectangle.rect.height);
+                }
+            }
         }
+        
+        LayoutRebuilder.ForceRebuildLayoutImmediate(sentenceContainerRectangle);
     }
 
     public void SetIConversable(IConversable conversable)
     {
         currentConversable = conversable;
+        
     }
 
     public void OnTimeRunOut()
@@ -171,8 +185,8 @@ public class StateTalkingAction : MonoBehaviour, IControlTypeState
     public void OnRespond()
     {
         Debug.Log("Button Clicked OnRespond");
-        // currentSentence.ConvertAll(x => x.word).ForEach(x => Debug.Log(x.presentedWord));
-        if (currentConversable.TryResponse(currentSentence.ConvertAll(x => x.word)))
+        // currentSentence.ConvertAll(x => x.wordData).ForEach(x => Debug.Log(x.presentedWord));
+        if (currentConversable.TryResponse(currentSentence.ConvertAll(x => x.wordData)))
         {
             currentConversable.StartSolutionChitChat();
             ActorControlTypeStateMachine.ChangeStateToListening(currentConversable);
