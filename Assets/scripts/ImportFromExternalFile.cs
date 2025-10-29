@@ -19,6 +19,15 @@ public static class ImportFromExternalFile
     private static Dictionary<int, List<string>> solvedPuzzleDialogues;
 
 #if UNITY_EDITOR
+    [MenuItem("Tools/Import Everything")]
+    public static void ImportEverythingAtOnce()
+    {
+        ImportChitChat();
+        ImportSolvedDialogue();
+        ImportWords();
+        ImportSentences();
+        ImportPuzzle();
+    }
     [MenuItem("Tools/Import Sentences")]
     public static void ImportSentences()
     {
@@ -32,11 +41,11 @@ public static class ImportFromExternalFile
         // - correct sentence need word assets and references to those words
         // - do that with id?
         // ---------------------------------------------------------
-
+        
         string pathFile = EditorUtility.OpenFilePanel("Select SentenceData CSV", "", "csv");
         if (string.IsNullOrEmpty(pathFile)) return;
         
-        string pathFolder = ROOT_PATH + "sentence-assets/";
+        string pathFolder = ROOT_PATH + "sentence-assets";
 
         string[] lines = File.ReadAllLines(pathFile);
 
@@ -60,7 +69,12 @@ public static class ImportFromExternalFile
             sentenceData.words = new List<WordData>();
 
             for (int j = 3; j < values.Length; j++)
-                sentenceData.words.Add(listWordData.Find(x => x.id == int.Parse(values[j])));
+                if (int.TryParse(values[j], out int result))
+                    sentenceData.words.Add(listWordData.Find(x => x.id == result));
+                    
+            sentenceData.SetSentence();
+            string assetPath = $"{pathFolder}/{sentenceData.id}.asset";
+            AssetDatabase.CreateAsset(sentenceData, assetPath);
             listSentenceData.Add(sentenceData);
         }
 
@@ -103,14 +117,11 @@ public static class ImportFromExternalFile
         Debug.Log("Import completed");
     }
 
-    private static void Action(WordData obj)
-    {
-        throw new NotImplementedException();
-    }
-
     [MenuItem("Tools/Import Puzzles")]
     public static void ImportPuzzle()
     {
+        listPuzzleData = new List<PuzzleData>();
+        
         string pathFile = EditorUtility.OpenFilePanel("Select PuzzleData CSV", "", "csv");
         if (string.IsNullOrEmpty(pathFile)) return;
         
@@ -127,13 +138,25 @@ public static class ImportFromExternalFile
 
             PuzzleData puzzleData = ScriptableObject.CreateInstance<PuzzleData>();
             puzzleData.id = int.Parse(values[0]);
-            puzzleData.correctSentenceData = listSentenceData.Find(x => x.id == int.Parse(values[1]));
-            puzzleData.dialogChitChat = chitChats[int.Parse(values[2])];
-            puzzleData.dialogPuzzleSolved = solvedPuzzleDialogues[int.Parse(values[3])];
+            if (int.TryParse(values[1],out int sentenceKey))
+                puzzleData.correctSentenceData = listSentenceData.Find(x => x.id == sentenceKey);
+            
+            if (int.TryParse(values[2], out int chitChatKey))
+                puzzleData.dialogChitChat = chitChats[chitChatKey];
+            if (int.TryParse(values[3], out int solvedDialoguesKey))
+                puzzleData.dialogPuzzleSolved = solvedPuzzleDialogues[solvedDialoguesKey];
+            
             puzzleData.dialogResponseFalse = values[4];
             puzzleData.dialogTimeRunOut = values[5];
             puzzleData.dialogPuzzlePrompt = values[6];
-            puzzleData.timelimitForPuzzleInSeconds = int.Parse(values[7]);
+            
+            if (int.TryParse(values[7], out int result))
+                puzzleData.timelimitForPuzzleInSeconds = result;
+            
+            
+            string assetPath = $"{pathFolder}/{puzzleData.id}.asset";
+            AssetDatabase.CreateAsset(puzzleData, assetPath);
+            listPuzzleData.Add(puzzleData);
         }
 
         AssetDatabase.SaveAssets();
