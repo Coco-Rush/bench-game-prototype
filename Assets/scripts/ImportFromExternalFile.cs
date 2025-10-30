@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using Object = UnityEngine.Object;
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEngine.UIElements;
 #endif
 
 public static class ImportFromExternalFile
@@ -90,31 +91,147 @@ public static class ImportFromExternalFile
         string pathFile = EditorUtility.OpenFilePanel("Select Word CSV", "", "csv");
         if (string.IsNullOrEmpty(pathFile)) return;
         
-        string pathFolder = ROOT_PATH + "word-assets/noun";
+        const string pathFolder = ROOT_PATH + "word-assets/";
+        string pathFolderVerb = pathFolder + "verb";
+        string pathFolderNoun = pathFolder + "noun";
+        string pathFolderAdj = pathFolder + "adjective";
+        string pathFolderPro = pathFolder + "pronoun";
+        string pathFolderOth = pathFolder + "other";
 
         listWordData = new List<WordData>();
 
         string[] lines = File.ReadAllLines(pathFile);
 
-        if (!Directory.Exists(pathFolder))
-            Directory.CreateDirectory(pathFolder);
+        if (!Directory.Exists(pathFolderVerb))
+            Directory.CreateDirectory(pathFolderVerb);
+        if (!Directory.Exists(pathFolderNoun))
+            Directory.CreateDirectory(pathFolderNoun);
+        if (!Directory.Exists(pathFolderAdj))
+            Directory.CreateDirectory(pathFolderAdj);
+        if (!Directory.Exists(pathFolderPro))
+            Directory.CreateDirectory(pathFolderPro);
+        if (!Directory.Exists(pathFolderOth))
+            Directory.CreateDirectory(pathFolderOth);
 
         for (int i = 1; i < lines.Length; i++)
         {
             string[] values = lines[i].Split(',');
 
-            WordData wordData = ScriptableObject.CreateInstance<NounData>();
-            wordData.id = int.Parse(values[0]);
-            wordData.presentedWord = values[1];
-
-            string assetPath = $"{pathFolder}/{wordData.presentedWord}.asset";
-            AssetDatabase.CreateAsset(wordData, assetPath);
-            listWordData.Add(wordData);
+            switch (int.Parse(values[2]))
+            {
+                case 0:
+                {
+                    ImportVerb(values, pathFolderVerb);
+                    break;
+                }
+                case 1:
+                {
+                    ImportNoun(values, pathFolderNoun);
+                    break;
+                }
+                case 2:
+                {
+                    ImportAdjective(values, pathFolderAdj);
+                    break;
+                }
+                case 3:
+                {
+                    ImportPronoun(values, pathFolderPro);
+                    break;
+                }
+                case 4:
+                {
+                    ImportOtherWord(values, pathFolderOth);
+                    break;
+                }
+                
+            }
+            
         }
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("Import completed");
+    }
+
+    private static void ImportNoun(string[] values, string pathFolder)
+    {
+        NounData wordData = ScriptableObject.CreateInstance<NounData>();
+        wordData.id = int.Parse(values[0]);
+        wordData.presentedWord = values[1];
+
+        string assetPath = $"{pathFolder}/{wordData.presentedWord}.asset";
+        AssetDatabase.CreateAsset(wordData, assetPath);
+        listWordData.Add(wordData);
+    }
+
+    private static void ImportVerb(string[] values, string pathFolder)
+    {
+        VerbData wordData = ScriptableObject.CreateInstance<VerbData>();
+        wordData.id = int.Parse(values[0]);
+        wordData.presentedWord = values[1];
+
+        wordData.infinitive = values[3];
+        wordData.imperative = values[4];
+        wordData.present[0] = values[5].Trim('"');
+        wordData.present[1] = values[6];
+        wordData.present[2] = values[7];
+        wordData.present[3] = values[8];
+        wordData.present[4] = values[9];
+        wordData.present[5] = values[10].Trim('"');
+        wordData.preterite[0] = values[11].Trim('"');
+        wordData.preterite[1] = values[12];
+        wordData.preterite[2] = values[13];
+        wordData.preterite[3] = values[14];
+        wordData.preterite[4] = values[15];
+        wordData.preterite[5] = values[16].Trim('"');
+
+        wordData.presentParticiple = values[17];
+        wordData.pastParticiple = values[18];
+        
+        string assetPath = $"{pathFolder}/{wordData.presentedWord}.asset";
+        AssetDatabase.CreateAsset(wordData, assetPath);
+        listWordData.Add(wordData);
+    }
+
+    private static void ImportAdjective(string[] values, string pathFolder)
+    {
+        AdjectiveData wordData = ScriptableObject.CreateInstance<AdjectiveData>();
+        wordData.id = int.Parse(values[0]);
+        wordData.presentedWord = values[1];
+
+        wordData.formBase = values[9];
+        wordData.formMore = values[10];
+        wordData.formMost = values[11];
+        wordData.hasOnlyBaseForm = bool.Parse(values[12]);
+        
+        string assetPath = $"{pathFolder}/{wordData.presentedWord}.asset";
+        AssetDatabase.CreateAsset(wordData, assetPath);
+        listWordData.Add(wordData);
+    }
+
+    private static void ImportPronoun(string[] values, string pathFolder)
+    {
+        PronounData wordData = ScriptableObject.CreateInstance<PronounData>();
+        wordData.id = int.Parse(values[0]);
+        wordData.presentedWord = values[1];
+
+        wordData.pronoun = Enum.Parse<Pronoun>(values[13]);
+        
+        string assetPath = $"{pathFolder}/{wordData.presentedWord}.asset";
+        AssetDatabase.CreateAsset(wordData, assetPath);
+        listWordData.Add(wordData);
+    }
+
+    private static void ImportOtherWord(string[] values, string pathFolder)
+    {
+        OtherData wordData = ScriptableObject.CreateInstance<OtherData>();
+        wordData.id = int.Parse(values[0]);
+        wordData.presentedWord = values[1];
+        
+        string assetPath = $"{pathFolder}/{wordData.presentedWord}.asset";
+        AssetDatabase.CreateAsset(wordData, assetPath);
+        listWordData.Add(wordData);
     }
 
     [MenuItem("Tools/Import Puzzles")]

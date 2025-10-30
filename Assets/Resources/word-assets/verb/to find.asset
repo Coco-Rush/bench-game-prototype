@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcf55f404bd477d1899b145844ef2890, type: 3}
-  m_Name: Have
+  m_Name: to find
   m_EditorClassIdentifier: 
-  id: 1
-  presentedWord: To Have
-  infinitiveForm: to have
-  imperativeForm: have
-  presentSimpleForm:
-  - have
-  - have
-  - has
-  - have
-  - have
-  - have
-  pastSimpleForm:
-  - had
-  - had
-  - had
-  - had
-  - had
-  - had
-  presentParticipleForm: having
-  pastParticipleForm: had
+  id: 12
+  presentedWord: to find
+  infinitive: find
+  imperative: find
+  present:
+  - find
+  - find
+  - finds
+  - find
+  - find
+  - find
+  preterite:
+  - found
+  - found
+  - found
+  - found
+  - found
+  - found
+  presentParticiple: finding
+  pastParticiple: found

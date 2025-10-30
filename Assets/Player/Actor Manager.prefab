@@ -558,15 +558,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wordsCollected:
-  - {fileID: 11400000, guid: d47db8a4278f13c0bae43291178daf41, type: 2}
-  - {fileID: 11400000, guid: 2e0c5d3a02d90e5f29d97b81889f0a73, type: 2}
-  - {fileID: 11400000, guid: b21f016b6e2dfd62989e256bdeee77d8, type: 2}
-  - {fileID: 11400000, guid: 7ce0be982c249484194bc9cef77194be, type: 2}
-  - {fileID: 11400000, guid: 95e94a1541b9fa6409cbd12f213e10d3, type: 2}
+  - {fileID: 11400000, guid: 32254c790965e1d428503fbc83849727, type: 2}
+  - {fileID: 11400000, guid: baecc60cd8c46b74fa926686133bdaa2, type: 2}
+  - {fileID: 11400000, guid: ebd7a2fde22681a40aeec883e7888b8f, type: 2}
+  - {fileID: 11400000, guid: 469f5ebad279eb14ca2ec1aa0fc43452, type: 2}
+  - {fileID: 11400000, guid: b3481f51debeeda42abaf90a6e3006a8, type: 2}
   - {fileID: 11400000, guid: 93c0d4c622ee01742b9bb5c38e958a21, type: 2}
-  - {fileID: 11400000, guid: 6c509e8420f9b93428e3280fea1418ae, type: 2}
+  - {fileID: 11400000, guid: cc71945099e8e584aa3c554dbedeaf10, type: 2}
+  - {fileID: 11400000, guid: c3c264bc9821ed94eababc4a7000ec77, type: 2}
+  - {fileID: 11400000, guid: c30db8906e5110f4cacf9342fe530df6, type: 2}
+  - {fileID: 11400000, guid: 27531e95f437e0b4e928d9f51ef62c7e, type: 2}
+  - {fileID: 11400000, guid: 84425fec3c9a33043a0bb76d77864f82, type: 2}
   toHave: {fileID: 11400000, guid: 2e0c5d3a02d90e5f29d97b81889f0a73, type: 2}
-  toBe: {fileID: 11400000, guid: d47db8a4278f13c0bae43291178daf41, type: 2}
+  toBe: {fileID: 11400000, guid: 84425fec3c9a33043a0bb76d77864f82, type: 2}
   will: {fileID: 11400000, guid: 3d44d06c674fe7642871ca5652e6abca, type: 2}
 --- !u!1 &6175192635033437921
 GameObject:

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db05f9a781e2e2b96807a57f2087eead, type: 3}
   m_Name: TestPuzzle
   m_EditorClassIdentifier: 
-  correctSentence: {fileID: 11400000, guid: 85d58137fd9514040abb1d7de1f5bb33, type: 2}
+  id: 0
+  correctSentenceData: {fileID: 11400000, guid: 3b443e4315004d3469e41d47eb17ea90, type: 2}
   dialogChitChat:
   - I'm hungry
   - i could go for a banana

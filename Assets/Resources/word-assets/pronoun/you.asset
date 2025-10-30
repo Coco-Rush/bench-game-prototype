@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba2911d2ccc1ec843be3121a867eae59, type: 3}
-  m_Name: You
+  m_Name: you
   m_EditorClassIdentifier: 
-  id: 0
-  presentedWord: You
+  id: 2
+  presentedWord: you
   pronoun: 1

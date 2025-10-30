@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcf55f404bd477d1899b145844ef2890, type: 3}
-  m_Name: Laugh
+  m_Name: to be
   m_EditorClassIdentifier: 
-  id: 2
-  presentedWord: To Laugh
-  infinitiveForm: to laugh
-  imperativeForm: laugh
-  presentSimpleForm:
-  - laugh
-  - laugh
-  - laughs
-  - laugh
-  - laugh
-  - laugh
-  pastSimpleForm:
-  - laughed
-  - laughed
-  - laughed
-  - laughed
-  - laughed
-  - laughed
-  presentParticipleForm: laughing
-  pastParticipleForm: laughed
+  id: 3
+  presentedWord: to be
+  infinitive: be
+  imperative: be
+  present:
+  - am
+  - are
+  - is
+  - are
+  - are
+  - are
+  preterite:
+  - was
+  - were
+  - was
+  - were
+  - were
+  - were
+  presentParticiple: being
+  pastParticiple: been

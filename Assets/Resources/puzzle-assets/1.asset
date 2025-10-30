@@ -27,12 +27,6 @@ MonoBehaviour:
   - I will leave the gate open for today.
   - '"I still need to finish my work'
   - ' if you need me you know where to find me."'
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   dialogResponseFalse: '"Stop wasting time! The key'
   dialogTimeRunOut: ' we need to find it!"'
   dialogPuzzlePrompt: '"Stop wasting time! The key'
