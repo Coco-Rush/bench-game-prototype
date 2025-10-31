@@ -1,0 +1,10 @@
+id,sentenceId,chitchatId,dialogPuzzleSolvedId,dialogResponseFalse,dialogTimeRunOut,dialogPuzzlePrompt,timelimitSeconds
+0,0,0,0,If you wanna talk at least find something to talk about!,If you wanna talk at least find something to talk about!,What do you want now? Don’t you see I’m working?,60
+1,1,1,1,"Stop wasting time! The key, we need to find it!","Stop wasting time! The key, we need to find it!",What is it? Did you find the key yet?,30
+2,,,,,,,60
+3,,,,,,,45
+4,,,,,,,120
+5,,,,,,,30
+6,,,,,,,
+7,,,,,,,
+8,,,,,,,

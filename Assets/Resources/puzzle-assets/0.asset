@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 0
   correctSentenceData: {fileID: 11400000, guid: 31b7da23fd07a9541993a868c83a4b4b, type: 2}
   dialogChitChat:
-  - '"Well well'
-  - " if it isn\u2019t the newcomer!\""
+  - Well well
+  - " if it isn\u2019t the newcomer!"
   - Make yourself useful instead of dozing off on that bench!
   timelimitForPuzzleInSeconds: 60
   isSolved: 0
@@ -25,8 +25,8 @@ MonoBehaviour:
   - "I always lock this zone when I\u2019m cleaning it."
   - "I don\u2019t want people to mess it up while I\u2019m trying to do my job!"
   - Next time think twice before taking a nap on that bench.
-  - '"Anyhow'
-  - ' let me get the key for you."'
+  - Anyhow
+  - ' let me get the key for you.'
   - ...
   - Wait... Where is the key?
   - I had it in my pocket!

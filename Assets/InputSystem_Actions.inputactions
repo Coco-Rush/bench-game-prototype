@@ -459,6 +459,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Cursor Position",
+                    "type": "Value",
+                    "id": "12177744-2c92-40ab-a384-659ecd49c3d1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -503,6 +512,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Undo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e56b87c7-41c0-472a-9e61-59dcbbef17d2",
+                    "path": "<Gamepad>/{Point}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Cursor Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1dc8e08-7944-448a-9629-0e18d71f9d43",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse;Touch",
+                    "action": "Cursor Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

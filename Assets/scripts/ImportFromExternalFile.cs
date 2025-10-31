@@ -308,7 +308,15 @@ public static class ImportFromExternalFile
             string[] values = lines[i].Split(',');
             dictionary.Add(int.Parse(values[0]), new List<string>());
 
-            for (int j = 1; j < values.Length; j++) dictionary[int.Parse(values[0])].Add(values[j]);
+            for (int j = 1; j < values.Length; j++)
+            {
+                if (string.IsNullOrEmpty(values[j])) break;
+
+                if (values[j].Contains('"'))
+                    values[j] = values[j].Trim('"');
+                
+                dictionary[int.Parse(values[0])].Add(values[j]);
+            }
         }
     }
 

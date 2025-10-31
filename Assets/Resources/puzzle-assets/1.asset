@@ -20,13 +20,13 @@ MonoBehaviour:
   timelimitForPuzzleInSeconds: 0
   isSolved: 0
   dialogPuzzleSolved:
-  - '"Oh'
-  - ' of course."'
-  - '"Here'
-  - ' you are free to go."'
+  - Oh
+  - ' of course.'
+  - Here
+  - ' you are free to go.'
   - I will leave the gate open for today.
-  - '"I still need to finish my work'
-  - ' if you need me you know where to find me."'
+  - I still need to finish my work
+  - ' if you need me you know where to find me.'
   dialogResponseFalse: '"Stop wasting time! The key'
   dialogTimeRunOut: ' we need to find it!"'
   dialogPuzzlePrompt: '"Stop wasting time! The key'
